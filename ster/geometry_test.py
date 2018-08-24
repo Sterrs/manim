@@ -3,13 +3,15 @@ from big_ol_pile_of_manim_imports import *
 #TODO: Add this to big_ol_pile_of_manim_imports
 from scene.geometry_scene import GeometryScene
 
+size = 5
+
 class GeometryTest(GeometryScene):
     CONFIG = {
         "graph_origin": 0*LEFT,
-        "x_min": -5,
-        "x_max": 5,
-        "y_min": -5,
-        "y_max": 5,
+        "x_min": -size,
+        "x_max": size,
+        "y_min": -size,
+        "y_max": size,
         "x_axis_width": 6, # Ratio of x and y needs to be the same to look symmetrical
     }
 
@@ -29,15 +31,15 @@ class GeometryTest(GeometryScene):
 
         # A little pattern that will be run each time to show off
         def go():
-            self.play(ApplyMethod(u.set_value, -2, run_time=1), ApplyMethod(v.set_value, 3, run_time=1))
-            self.play(ApplyMethod(u.set_value, 1, run_time=1), ApplyMethod(v.set_value, -2, run_time=1))
-            self.play(ApplyMethod(u.set_value, 3, run_time=1), ApplyMethod(v.set_value, 2, run_time=1))
+            self.play(ApplyMethod(u.set_value, -2, run_time=1), ApplyMethod(v.set_value, 3, run_time=2))
+            self.play(ApplyMethod(u.set_value, 1, run_time=1), ApplyMethod(v.set_value, -2, run_time=2))
+            self.play(ApplyMethod(u.set_value, 3, run_time=1), ApplyMethod(v.set_value, 2, run_time=2))
 
 
         # First dot
         dotA = self.new_point_from_coords(u, v, label="A")
         dotB = self.new_point_from_coords(v, u, label="B")
-        go()
+        #go()
         dotC = self.new_point_from_coords(neg_v, u, label="C")
         dotD = self.new_point_from_coords(neg_v, neg_u, label="D")
         dotE = self.new_point_from_coords(v, neg_u, label="E")
@@ -46,6 +48,9 @@ class GeometryTest(GeometryScene):
         polygon = self.new_polygon_from_points(dotA, dotB, dotC, dotD, dotE)
 
         # Animate again!
+        #go()
+
+        circle = self.new_circle_from_points(dotA, dotB, dotC)
         go()
 
         self.wait(2)
